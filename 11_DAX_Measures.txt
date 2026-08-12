@@ -1,0 +1,159 @@
+==================================================
+ENTERPRISE BANK FRAUD ANALYTICS
+POWER BI DAX MEASURES
+==================================================
+
+
+==================================================
+TRANSACTION KPIs
+==================================================
+
+Total Transactions =
+COUNTROWS(VW_POWERBI_DATA)
+
+
+Fraud Transactions =
+CALCULATE(
+    COUNTROWS(VW_POWERBI_DATA),
+    VW_POWERBI_DATA[FRAUD_BOOL] = 1
+)
+
+
+Legitimate Transactions =
+CALCULATE(
+    COUNTROWS(VW_POWERBI_DATA),
+    VW_POWERBI_DATA[FRAUD_BOOL] = 0
+)
+
+
+==================================================
+FRAUD KPIs
+==================================================
+
+Fraud Rate % =
+DIVIDE(
+    [Fraud Transactions],
+    [Total Transactions],
+    0
+)
+
+
+==================================================
+CUSTOMER / FINANCIAL KPIs
+==================================================
+
+Average Estimated Income =
+AVERAGE(VW_POWERBI_DATA[INCOME])
+
+
+Average Credit Risk Score =
+AVERAGE(VW_POWERBI_DATA[CREDIT_RISK_SCORE])
+
+
+Average Credit Limit =
+AVERAGE(VW_POWERBI_DATA[PROPOSED_CREDIT_LIMIT])
+
+
+==================================================
+RISK KPIs
+==================================================
+
+High Risk Transactions =
+CALCULATE(
+    COUNTROWS(VW_POWERBI_DATA),
+    VW_POWERBI_DATA[RISK_CATEGORY] = "High"
+)
+
+
+Very High Risk Transactions =
+CALCULATE(
+    COUNTROWS(VW_POWERBI_DATA),
+    VW_POWERBI_DATA[RISK_CATEGORY] = "Very High"
+)
+
+
+High Risk Fraud Rate =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS(VW_POWERBI_DATA),
+        VW_POWERBI_DATA[RISK_CATEGORY] = "High",
+        VW_POWERBI_DATA[FRAUD_BOOL] = 1
+    ),
+    CALCULATE(
+        COUNTROWS(VW_POWERBI_DATA),
+        VW_POWERBI_DATA[RISK_CATEGORY] = "High"
+    ),
+    0
+)
+
+
+Average Fraud Risk Score =
+CALCULATE(
+    AVERAGE(VW_POWERBI_DATA[CREDIT_RISK_SCORE]),
+    VW_POWERBI_DATA[FRAUD_BOOL] = 1
+)
+
+
+==================================================
+BEHAVIORAL KPIs
+==================================================
+
+Foreign Requests =
+CALCULATE(
+    COUNTROWS(VW_POWERBI_DATA),
+    VW_POWERBI_DATA[FOREIGN_REQUEST] = 1
+)
+
+
+Valid Home Phone % =
+AVERAGE(VW_POWERBI_DATA[HOME_PHONE_VALID])
+
+
+Valid Mobile % =
+AVERAGE(VW_POWERBI_DATA[MOBILE_VALID])
+
+
+Average Session Duration =
+AVERAGE(VW_POWERBI_DATA[SESSION_DURATION])
+
+
+==================================================
+PAGE 1
+EXECUTIVE FRAUD OVERVIEW
+==================================================
+
+Used KPIs:
+
+- Total Transactions
+- Fraud Transactions
+- Legitimate Transactions
+- Fraud Rate %
+- Average Estimated Income
+- Average Credit Risk Score
+
+
+==================================================
+PAGE 2
+CUSTOMER AND RISK ANALYSIS
+==================================================
+
+Used KPIs:
+
+- Average Credit Limit
+- Foreign Requests
+- Valid Home Phone %
+- Valid Mobile %
+- Average Session Duration
+
+
+==================================================
+PAGE 3
+FRAUD PATTERN AND BEHAVIORAL ANALYSIS
+==================================================
+
+Used KPIs:
+
+- High Risk Transactions
+- Very High Risk Transactions
+- High Risk Fraud Rate
+- Average Fraud Risk Score
