@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Enterprise Bank Fraud Analytics
 
 ## Project objective
