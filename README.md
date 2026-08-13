@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Enterprise Bank Fraud Analytics
 
 ## Project objective
@@ -75,3 +76,7 @@ Populate this section with validated findings after the approved data model, met
 
 Credentials, passwords, tokens, account identifiers, and connection strings must never be committed to this repository. Use approved secret management and role-based access controls.
 
+=======
+# Enterprise-Bank-Fraud-Analytics
+Enterprise Bank Fraud Analytics using Snowflake SQL and Power BI
+>>>>>>> 6db9c04cec7a9cae2b2f83d834b650d8d125fa33
