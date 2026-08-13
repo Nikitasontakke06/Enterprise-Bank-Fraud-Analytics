@@ -1,82 +1,96 @@
-
 # Enterprise Bank Fraud Analytics
 
-## Project objective
+An end-to-end banking fraud analytics project using **Snowflake SQL and Power BI** to identify fraud patterns, analyze customer and transaction risk, and provide interactive business insights.
 
-Provide an enterprise-ready foundation for analyzing banking fraud in Snowflake and presenting governed insights through Power BI.
+---
 
-## Business problem
+## Project Overview
 
-Fraud teams need reliable, timely visibility into transaction patterns, customer risk, and behavioral signals so they can monitor fraud exposure and prioritize investigation.
+The Enterprise Bank Fraud Analytics project provides an analytical framework for understanding fraudulent transactions across different customer, payment, device, employment, housing, and risk characteristics.
 
-## Technologies used
+The project combines:
 
-- Snowflake for data storage, transformation, views, streams, and tasks
-- Power BI for dashboarding and DAX measures
-- SQL for the data pipeline and analytical layer
+- Snowflake for data ingestion, cleaning, transformation, analysis, views, streams, and tasks
+- SQL for the analytical data pipeline
+- Power BI for interactive dashboards and DAX-based KPIs
+- GitHub for version control and project documentation
 
-## Architecture overview
+---
 
-Source data is loaded into the `RAW` schema, cleaned in `STAGING`, and transformed into governed analytical objects in `ANALYTICS`. Power BI consumes approved `ANALYTICS` views.
+## Business Problem
 
-## Snowflake database structure
+Banking organizations process large volumes of transactions, making it difficult to identify fraudulent activity and understand the factors associated with fraud.
 
-- Database: `BANK_FRAUD_DB`
-- Warehouse: `BANK_WH`
-- Schemas: `RAW`, `STAGING`, `ANALYTICS`
+Fraud and risk teams need reliable analytical insights to:
 
-The `ANALYTICS` layer is planned to contain `TRANSACTION_HISTORY`, `NEW_TRANSACTIONS`, `TIME_TRAVEL_DEMO`, `VW_POWERBI_DATA`, `VW_CUSTOMER_ANALYSIS`, `VW_DEVICE_ANALYSIS`, `VW_FRAUD_OVERVIEW`, `VW_MONTHLY_FRAUD`, and `VW_PAYMENT_ANALYSIS`.
+- Monitor overall fraud exposure
+- Identify high-risk transactions
+- Analyze fraud trends over time
+- Understand customer risk characteristics
+- Identify suspicious payment and device patterns
+- Compare legitimate and fraudulent transactions
+- Support data-driven fraud investigation and decision-making
 
-## Data pipeline
+---
 
-1. Load approved source data to `RAW`.
-2. Validate, deduplicate, and standardize it in `STAGING`.
-3. Apply approved fraud and risk transformations in `ANALYTICS`.
-4. Expose governed analytical views to Power BI.
-5. Use streams and tasks for approved incremental processing.
+## Project Objectives
 
-## Power BI dashboard structure
+1. Build a structured fraud analytics pipeline using Snowflake.
+2. Load and validate raw transaction data.
+3. Clean and standardize transaction attributes.
+4. Create analytical views for Power BI.
+5. Analyze fraud across customer, payment, device, and risk dimensions.
+6. Develop interactive Power BI dashboards.
+7. Create reusable DAX measures for business KPIs.
+8. Implement Snowflake Streams and Tasks for incremental processing.
 
-The Power BI workbook is maintained at `PowerBI/Enterprise_Bank_Fraud_Analytics.pbix`. This repository scaffold does not create or alter the PBIX file.
+---
 
-### Page 1 — Enterprise Bank Fraud Analytics Dashboard
+## Technologies Used
 
-Purpose: Executive Fraud Overview.
+| Technology | Purpose |
+|---|---|
+| Snowflake | Data storage, processing, transformation and analytics |
+| SQL | Data ingestion, cleaning, transformation and analysis |
+| Power BI | Interactive dashboards and visualization |
+| DAX | KPI calculations and analytical measures |
+| Git & GitHub | Version control and project management |
 
-### Page 2 — Customer And Risk Analysis Dashboard
+---
 
-Purpose: Customer and Risk Analysis.
+# Architecture
 
-### Page 3 — Fraud Pattern & Behavioral Analysis
-
-Purpose: Fraud Pattern and Behavioral Analysis.
-
-## Key KPIs
-
-- Total transactions
-- Fraud transactions
-- Legitimate transactions
-- Fraud rate
-- Risk-category distribution
-- Customer, device, payment, and behavioral indicators
-
-## Key insights
-
-Populate this section with validated findings after the approved data model, metrics, and dashboard visuals are implemented.
-
-## How to reproduce the project
-
-1. Obtain approved access to Snowflake and the source data.
-2. Review each numbered SQL file and add organization-approved implementation logic.
-3. Execute scripts in numerical order in an approved Snowflake environment.
-4. Build or update the Power BI workbook using only the approved analytical views.
-5. Document verified DAX measures in `08_DAX_Measures.txt`.
-
-## Security note
-
-Credentials, passwords, tokens, account identifiers, and connection strings must never be committed to this repository. Use approved secret management and role-based access controls.
-
-=======
-# Enterprise-Bank-Fraud-Analytics
-Enterprise Bank Fraud Analytics using Snowflake SQL and Power BI
->>>>>>> 6db9c04cec7a9cae2b2f83d834b650d8d125fa33
+```text
+                         Source Dataset
+                              |
+                              v
+                    +-------------------+
+                    |     Snowflake     |
+                    +-------------------+
+                              |
+                              v
+                         RAW Schema
+                              |
+                              v
+                       STAGING Schema
+                              |
+                 Data Cleaning & Transformation
+                              |
+                              v
+                      ANALYTICS Schema
+                              |
+             +----------------+----------------+
+             |                |                |
+             v                v                v
+       Analytical Views   SQL Analysis    Streams & Tasks
+             |
+             v
+                         Power BI
+             |
+      +------+------+------+
+      |             |      |
+      v             v      v
+   Page 1         Page 2  Page 3
+ Executive       Customer Fraud Pattern
+ Overview        & Risk    & Behavioral
+                Analysis    Analysis
